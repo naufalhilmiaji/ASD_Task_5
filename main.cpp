@@ -87,9 +87,9 @@ address inputMusic() {
     * PR : meminta input user untuk mengisi nama dan lokasi file
     * FS : mengembalikan allocate elemen dengan data nama dan lokasi file
     */
-    cout<<"input music filename (.wav) : ";
+    cout<<"input music filename (.wav): ";
     cin>>x.name;
-    cout<<"input music location "<<endl<<"(write - for default /asset location) :";
+    cout<<"input music location "<<endl<<"(write - for default /asset location):";
     cin>>x.location;
     if(x.location=="-") {
         x.location="asset";
@@ -114,8 +114,8 @@ void runMenu(int menu) {
     case 2:
         // insert last music
         //-------------your code here-------------
-        cout<<"UNDER MAIN TENIS"<<endl;
-
+        P = inputMusic();
+        insertLast(L,P);
         //----------------------------------------
         cout<<"press enter";getche();
         break;
@@ -132,14 +132,14 @@ void runMenu(int menu) {
     case 5:
         // play last music
         //-------------your code here-------------
-        cout<<"UNDER MAIN TENIS"<<endl;
-
+        P=last(L);
+        playMusic(P);
         //----------------------------------------
         break;
     case 6:
         // search music by name
         //-------------your code here-------------
-        cout<<"input music filename (.wav) : ";
+        cout<<"input music filename (.wav): ";
         cin>>x.name;
         P = findElmByName(L, x);
         if(P != NULL){
@@ -151,8 +151,13 @@ void runMenu(int menu) {
     case 7:
         // search music by ID
         //-------------your code here-------------
-        cout<<"UNDER MAIN TENIS"<<endl;
-
+        cout<<"input music filename (.wav): ";
+        cin>>x.ID;
+        P=findElmByID(L,x);
+        if (P!=NULL) {
+            cout<<"music found"<<endl;
+            playMusic(P);
+        }
         //----------------------------------------
         cout<<"press enter";getche();
         break;
@@ -172,8 +177,10 @@ void runMenu(int menu) {
     case 10:
         // play previous music
         //-------------your code here-------------
-        cout<<"UNDER MAIN TENIS"<<endl;
-
+        if (P!=NULL) {
+            P=prev(P);
+            playMusic(P);
+        }
         //----------------------------------------
         break;
     case 11:
@@ -189,20 +196,20 @@ void runMenu(int menu) {
     case 13:
         // play repeat all music
         int n;
-        cout<<"input repeat times : ";
+        cout<<"input repeat times: ";
         cin>>n;
         playRepeat(L,n);
         cout<<"press enter";getche();
         break;
     case 14:
         // delete music by ID
-        cout<<"input music ID : ";
+        cout<<"input music ID: ";
         cin>>x.name;
         deleteMusicByID(L, x);
         cout<<"press enter";getche();
         break;
     case 0:
-        cout<<"thank you"<<endl;
+        cout<<"Thank You and See You Later"<<endl;
         break;
     default :
         cout<<"wrong input"<<endl;
